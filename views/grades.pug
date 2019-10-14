@@ -1,0 +1,19 @@
+extends layout
+	block content
+		.container
+			table
+				thead
+					tr
+						th ID
+						th Name
+						th Grade
+						th Info
+				tbody
+					each grade in grades
+						tr
+							td= grade.id
+							td= grade.name
+							td
+								input.input(type='number' value=grade.grade)
+							td
+								input.input(type='text' value=grade.info)
