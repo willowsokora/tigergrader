@@ -11,7 +11,7 @@ block content
 				.control
 					button#viewcourses.button.is-link View courses
 		#courses
-		progress#progress.progress.is-medium.is-dark(max='100' hidden)
+		progress#progress.progress.is-medium.is-dark(max='100' style='display: none; position: fixed; bottom: 0')
 	script(type='text/javascript').
 		$(() => {
 			var key;
@@ -22,6 +22,7 @@ block content
 					data.forEach((course) => {
 						$('#courses').append(`<button class="course button is-large is-link is-fullwidth" data-course="${course.id}">${course.name}</button>`)
 					});
+					$('#progress').hide();
 				});
 			});
 
