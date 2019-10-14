@@ -1,30 +1,31 @@
 extends layout
-	block content
-		.container
-			form(action='#')
-				.field
-					label.label Canvas API Key
-					.control
-						input#keyinput.input(type='text' name='canvas_key' required)
-				.field
-					.control
-						button#viewcourses.button.is-link View courses
-			#courses
-			progress#progress.progress.is-medium.is-dark(max='100' hidden)
-		script(type='text/javascript').
-			$(() => {
-				var key;
-				$('#viewcourses').click(() => {
-					$('#progress').show();
-					key = $('#keyinput').value();
-					$.get(`https://missouri.instructure.com/api/v1/courses?access_token=${key}`, (data) => {
-						data.forEach((course) => {
-							$('#courses').append(`<button class="course button is-large is-link is-fullwidth" data-course="${course.id}">${course.name}</button>`)
-						});
+
+block content
+	.container
+		form(action='#')
+			.field
+				label.label Canvas API Key
+				.control
+					input#keyinput.input(type='text' name='canvas_key' required)
+			.field
+				.control
+					button#viewcourses.button.is-link View courses
+		#courses
+		progress#progress.progress.is-medium.is-dark(max='100' hidden)
+	script(type='text/javascript').
+		$(() => {
+			var key;
+			$('#viewcourses').click(() => {
+				$('#progress').show();
+				key = $('#keyinput').value();
+				$.get(`https://missouri.instructure.com/api/v1/courses?access_token=${key}`, (data) => {
+					data.forEach((course) => {
+						$('#courses').append(`<button class="course button is-large is-link is-fullwidth" data-course="${course.id}">${course.name}</button>`)
 					});
 				});
-
-				$('.course').click(() => {
-					console.log($(this).data('course'));
-				});
 			});
+
+			$('.course').click(() => {
+				console.log($(this).data('course'));
+			});
+		});
